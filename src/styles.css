@@ -356,7 +356,7 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 45px 22px; padding: 58px var(--page-gutter); }
   .footer-brand { grid-column: 1 / -1; }
   .footer-social { grid-column: 1 / -1; }
-  .footer-bottom { grid-template-columns: 1fr; gap: 8px; text-align: center; }
+  .footer-bottom { grid-template-columns: 1fr; gap: 8px; padding-bottom: 100px; text-align: center; }
   .footer-bottom > span:last-child { text-align: center; }
 }
 
