@@ -14,7 +14,7 @@ for (const [folder, locale] of [['', 'es'], ['es', 'es'], ['en', 'en']]) {
   if (!existsSync(path)) throw new Error(`Missing built locale page: ${path}`);
   const links = `<link rel="canonical" href="${siteUrl}/${locale}/" /><link rel="alternate" hreflang="es" href="${siteUrl}/es/" /><link rel="alternate" hreflang="en" href="${siteUrl}/en/" /><link rel="alternate" hreflang="x-default" href="${siteUrl}/es/" />`;
   let html = readFileSync(path, 'utf8').replace('</head>', `${links}</head>`);
-  html = html.replace('content="/images/hero-editorial.webp"', `content="${siteUrl}/images/hero-editorial.webp"`);
+  html = html.replace('content="/images/hero-artevital.webp"', `content="${siteUrl}/images/hero-artevital.webp"`);
   writeFileSync(path, html);
 }
 

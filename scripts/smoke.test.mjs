@@ -7,8 +7,8 @@ const dist = resolve(import.meta.dirname, '../dist');
 
 test('both language routes contain crawlable content and the approved navigation', () => {
   const expectations = {
-    es: ['lang="es"', 'Tu ', 'Peinados', 'Maquillaje', 'Faciales', 'Casa de Campo', 'Sobre mí', 'Opiniones', 'Leer mi presentación'],
-    en: ['lang="en"', 'Your ', 'Hairstyling', 'Makeup', 'Facials', 'Casa de Campo', 'About me', 'Reviews', 'Read my story'],
+    es: ['lang="es"', 'Tu ', 'Peinados', 'Maquillaje', 'Faciales', 'Novias', 'Casa de Campo', 'Sobre mí', 'Opiniones', 'Leer mi presentación'],
+    en: ['lang="en"', 'Your ', 'Hairstyling', 'Makeup', 'Facials', 'Bridal', 'Casa de Campo', 'About me', 'Reviews', 'Read my story'],
   };
   for (const [lang, words] of Object.entries(expectations)) {
     const html = readFileSync(resolve(dist, lang, 'index.html'), 'utf8');
@@ -22,10 +22,12 @@ test('both language routes contain crawlable content and the approved navigation
     assert.ok(html.includes('Plaza Buena Vista, Calle Los Robles'), `${lang} is missing the address`);
     assert.ok(html.includes('google.com/maps/place/Artevital'), `${lang} is missing the Google profile`);
     assert.ok(!/<nav class="desktop-nav"[^>]*>[\s\S]*?href="#contacto"/.test(html.split('</nav>')[0]), `${lang} header still has Contact`);
-    assert.equal((html.match(/data-carousel aria-label=/g) ?? []).length, 3, `${lang} should have three carousels`);
+    assert.equal((html.match(/data-carousel aria-label=/g) ?? []).length, 4, `${lang} should have four carousels`);
     assert.ok(html.includes('id="jina-story"'), `${lang} is missing Jina's dialog`);
     assert.ok(html.includes('id="casa-notes"'), `${lang} is missing Casa de Campo notes`);
     assert.ok(html.includes('artevitallr@gmail.com') && html.includes('jinamorales@live.com'), `${lang} is missing contact emails`);
+    const bridal = html.match(/<section class="service service--novias[\s\S]*?<\/section>/)?.[0] ?? '';
+    assert.equal((bridal.match(/class="service-carousel__slide"/g) ?? []).length, 6, `${lang} must include all six bridal photos`);
     for (const price of ['US$531', 'US$413', 'US$295', 'US$236', 'US$212', 'US$177', 'US$94', 'US$59', 'US$35']) {
       assert.ok(html.includes(price), `${lang} is missing ${price}`);
     }
@@ -33,7 +35,7 @@ test('both language routes contain crawlable content and the approved navigation
 });
 
 test('required visual assets and entry points are built', () => {
-  for (const path of ['index.html', 'robots.txt', 'images/artevital-logo-transparent.webp', 'images/jina-signature-transparent.png', 'images/jina-morales-enhanced.webp', 'icons/whatsapp.svg', 'icons/instagram.svg', 'images/hero-editorial.webp', 'images/hairstyles-editorial.webp', 'images/makeup-editorial.webp', 'images/facials-editorial.webp', 'images/casa-de-campo-boho-chic.webp', 'images/hairstyles-chignon.jpg', 'images/hairstyles-waves.jpg', 'images/makeup-bridal.jpg', 'images/makeup-evening.jpg', 'images/facials-mask.jpg', 'images/facials-glow.jpg']) {
+  for (const path of ["index.html", "robots.txt", "images/artevital-logo-transparent.webp", "images/jina-morales-signature.png", "images/jina-morales-enhanced.webp", "icons/whatsapp.svg", "icons/instagram.svg", "images/hero-artevital.webp", "images/casa-de-campo-boho-chic.webp", "images/peinados-01.webp", "images/peinados-02.webp", "images/peinados-03.webp", "images/peinados-04.webp", "images/peinados-05.webp", "images/novias-01.webp", "images/novias-02.webp", "images/novias-03.webp", "images/novias-04.webp", "images/novias-05.webp", "images/novias-06.webp", "images/maquillaje-01.webp", "images/maquillaje-02.webp", "images/faciales-01.webp", "images/faciales-02.webp", "images/faciales-03.webp"]) {
     assert.ok(existsSync(resolve(dist, path)), `missing ${path}`);
   }
 });

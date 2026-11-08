@@ -30,7 +30,7 @@ pnpm test
 - `src/components/index.ts`: secciones y navegación.
 - `scripts/prepare_images.py`: prepara recortes WebP a partir de las dos maquetas suministradas.
 
-El logo transparente procede del archivo oficial aportado. La foto de Jina es una mejora de la fotografía enviada y su firma procede del archivo adjunto. El hero y las imágenes de servicios siguen siendo recortes **editoriales provisionales** de las maquetas; no muestran necesariamente clientas ni trabajos reales. Sustituirlas por fotografías autorizadas o licenciadas cuando estén disponibles.
+El logo transparente procede del archivo oficial aportado. La foto de Jina conserva la mejora de la fotografía enviada y la firma se ha sustituido por el PNG transparente facilitado. El hero y las galerías de Peinados, Maquillaje, Faciales y Novias usan las imágenes de las carpetas de Drive indicadas, optimizadas en WebP sin deformar su proporción. Los encuadres se adaptan en CSS al mismo marco de los carruseles. Mantener confirmados los permisos de uso de las imágenes.
 
 ## Datos pendientes de confirmar
 

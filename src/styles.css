@@ -76,8 +76,8 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
 .shortcut-icon svg { width: 29px; height: 29px; transform: rotate(6deg); }
 .hero-shortcuts a:hover .shortcut-icon { background: #fff; transform: rotate(0deg) translateY(-4px); }
 .hero-visual { position: absolute; inset: 0; overflow: hidden; background: #d8cab5; }
-.hero-visual::before { content: ''; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(247,245,239,0) 0%, rgba(247,245,239,.06) 33%, rgba(247,245,239,.78) 55%, rgba(247,245,239,.98) 76%, var(--ivory) 100%); pointer-events: none; }
-.hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 46% center; }
+.hero-visual::before { content: ''; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(247,245,239,0) 0%, rgba(247,245,239,0) 28%, rgba(247,245,239,.3) 38%, rgba(247,245,239,.93) 52%, var(--ivory) 62%, var(--ivory) 100%); pointer-events: none; }
+.hero-visual img { width: 60%; height: 100%; object-fit: cover; object-position: center 65%; }
 .hero-visual__note { position: absolute; left: var(--page-gutter); bottom: 38px; z-index: 2; max-width: 220px; color: #fff; font-family: var(--serif); font-size: clamp(1.5rem, 2.2vw, 2.4rem); font-style: italic; line-height: 1; text-align: left; text-shadow: 0 1px 10px rgba(0,0,0,.32); }
 
 .service { display: grid; grid-template-columns: minmax(0, 43%) minmax(0, 57%); min-height: 520px; background: var(--warm-cream); }
@@ -91,8 +91,8 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
 .service-copy h2 { position: relative; max-width: 580px; margin-bottom: 22px; padding-bottom: 22px; font-size: clamp(4.1rem, 5.6vw, 6.7rem); }
 .service-copy h2::after { content: ''; position: absolute; left: 2px; bottom: 1px; width: 110px; height: 2px; background: linear-gradient(90deg, var(--olive-gold-dark), transparent); transform: rotate(-4deg); }
 .service-copy > p:not(.eyebrow) { max-width: 430px; margin-bottom: 25px; color: var(--muted-text); font-size: 1.02rem; }
-.service-visual { min-height: 520px; overflow: hidden; }
-.service-carousel { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.service-visual { position: relative; min-height: 520px; overflow: hidden; }
+.service-carousel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
 .service-carousel__track { display: flex; width: 100%; height: 100%; transition: transform .8s cubic-bezier(.22,.65,.2,1); }
 .service-carousel__slide { flex: 0 0 100%; width: 100%; height: 100%; }
 .service-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
@@ -272,7 +272,7 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
   .casa-plans__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
   .site-header { height: 78px; }
   .site-header.is-scrolled { height: 70px; }
   .desktop-nav, .header-actions > .language-switcher { display: none; }
@@ -290,7 +290,7 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
   .mobile-nav__link[aria-current] { color: var(--olive-gold-dark); }
   .mobile-nav__footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding-top: 20px; }
   .hero { min-height: 660px; }
-  .hero-copy { width: 63%; padding-top: 72px; padding-bottom: 70px; }
+  .hero-copy { width: 56%; padding-top: 72px; padding-bottom: 70px; }
   .hero-shortcuts { flex-wrap: wrap; row-gap: 14px; }
   .hero-shortcuts a { min-width: 83px; font-size: .62rem; }
   .casa-intro { gap: 40px; }
@@ -310,17 +310,18 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
   .hero-copy .eyebrow { margin-bottom: 20px; }
   .hero h1 { max-width: 620px; margin-bottom: 22px; font-size: clamp(4.1rem, 14vw, 6.2rem); line-height: .82; }
   .hero-lede { margin-bottom: 24px; }
-  .hero-shortcuts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-self: stretch; margin-top: 32px; }
+  .hero-shortcuts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-self: stretch; margin-top: 32px; }
   .hero-shortcuts a { min-width: 0; padding-inline: 3px; font-size: .53rem; line-height: 1.2; }
   .shortcut-icon { width: 43px; height: 43px; border-radius: 13px 13px 13px 3px; }
   .shortcut-icon svg { width: 25px; height: 25px; }
   .hero-visual { inset: auto 0 0; height: 390px; }
   .hero-visual::before { inset: 0; background: linear-gradient(180deg, var(--ivory) 0%, rgba(247,245,239,.92) 15%, rgba(247,245,239,.28) 40%, rgba(247,245,239,0) 70%); }
-  .hero-visual img { object-position: 15% center; }
+  .hero-visual img { width: 100%; object-position: center 28%; }
   .hero-visual__note { right: 20px; left: auto; bottom: 18px; font-size: 1.8rem; text-align: right; }
   .service, .service--reverse { display: flex; flex-direction: column; min-height: 0; }
   .service-copy, .service--reverse .service-copy { order: 1; padding: 58px var(--page-gutter) 38px; }
   .service-visual, .service--reverse .service-visual { order: 2; min-height: 0; height: clamp(250px, 67vw, 430px); }
+  .carousel-dots { bottom: 84px; left: 22px; }
   .service-copy .eyebrow { margin-bottom: 17px; }
   .service-copy h2 { margin-bottom: 15px; font-size: clamp(4.1rem, 12vw, 6rem); }
   .service-copy > p:not(.eyebrow) { margin-bottom: 18px; }

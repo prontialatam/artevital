@@ -1,4 +1,4 @@
-import type { Language, SectionId } from './site';
+import type { Language, SectionId, ServiceId } from './site';
 
 type ServiceText = { eyebrow: string; title: string; accent: string; body: string; alt: string; action: string };
 type Dictionary = {
@@ -9,7 +9,7 @@ type Dictionary = {
   booking: string;
   bookingMessage: string;
   hero: { eyebrow: string; first: string; firstAccent: string; second: string; secondAccent: string; body: string; imageAlt: string; imageNote: string };
-  services: Record<'peinados' | 'maquillaje' | 'faciales', ServiceText>;
+  services: Record<ServiceId, ServiceText>;
   casa: { eyebrow: string; title: string; accent: string; body: string; note: string; imageAlt: string };
   about: { eyebrow: string; title: string; titleAccent: string; body: string; storyToggle: string; storyTitle: string; storyParagraphs: string[]; instagramAction: string; closeStory: string };
   reviews: { eyebrow: string; title: string; accent: string; body: string; action: string };
@@ -19,18 +19,19 @@ type Dictionary = {
 
 export const translations: Record<Language, Dictionary> = {
   es: {
-    nav: { inicio: 'Inicio', peinados: 'Peinados', maquillaje: 'Maquillaje', faciales: 'Faciales', 'casa-de-campo': 'Casa de Campo', nosotros: 'Sobre mí', opiniones: 'Opiniones', contacto: 'Contacto' },
+    nav: { inicio: 'Inicio', peinados: 'Peinados', maquillaje: 'Maquillaje', faciales: 'Faciales', novias: 'Novias', 'casa-de-campo': 'Casa de Campo', nosotros: 'Sobre mí', opiniones: 'Opiniones', contacto: 'Contacto' },
     menu: 'Abrir menú', closeMenu: 'Cerrar menú', skip: 'Saltar al contenido', booking: 'Reservar cita', bookingMessage: 'Hola, me gustaría reservar una cita en ArteVital.',
     hero: {
       eyebrow: 'Belleza · Armonía · Bienestar', first: 'Tu belleza,', firstAccent: 'belleza', second: 'nuestra inspiración', secondAccent: 'inspiración',
       body: 'Experiencias de belleza personalizadas para realzar tu estilo y hacerte sentir increíble, cada día.',
-      imageAlt: 'Retrato editorial de belleza usado como imagen provisional',
+      imageAlt: 'Peinado con tiara para una ocasión especial',
       imageNote: 'Un espacio para dedicarte tiempo',
     },
     services: {
-      peinados: { eyebrow: 'Peinados', title: 'Estilo que realza tu esencia', accent: 'tu esencia', body: 'Peinados pensados para acompañarte en cada ocasión, con atención al detalle y un acabado elegante.', alt: 'Imagen editorial provisional de un peinado recogido', action: 'Consultar peinados' },
-      maquillaje: { eyebrow: 'Maquillaje', title: 'Realza tu belleza natural', accent: 'belleza natural', body: 'Maquillaje pensado para expresar tu personalidad y acompañar tus momentos especiales.', alt: 'Imagen editorial provisional de aplicación de maquillaje', action: 'Consultar maquillaje' },
-      faciales: { eyebrow: 'Faciales', title: 'Una piel luminosa, un cuidado especial', accent: 'piel luminosa', body: 'Descubre nuestras opciones de cuidado facial y encuentra la experiencia adecuada para ti.', alt: 'Imagen editorial provisional de una experiencia facial', action: 'Consultar faciales' },
+      peinados: { eyebrow: 'Peinados', title: 'Estilo que realza tu esencia', accent: 'tu esencia', body: 'Peinados pensados para acompañarte en cada ocasión, con atención al detalle y un acabado elegante.', alt: 'Peinado con ondas y detalle trenzado', action: 'Consultar peinados' },
+      maquillaje: { eyebrow: 'Maquillaje', title: 'Realza tu belleza natural', accent: 'belleza natural', body: 'Maquillaje pensado para expresar tu personalidad y acompañar tus momentos especiales.', alt: 'Preparación de maquillaje profesional', action: 'Consultar maquillaje' },
+      faciales: { eyebrow: 'Faciales', title: 'Una piel luminosa, un cuidado especial', accent: 'piel luminosa', body: 'Descubre nuestras opciones de cuidado facial y encuentra la experiencia adecuada para ti.', alt: 'Tratamiento de cuidado facial', action: 'Consultar faciales' },
+      novias: { eyebrow: 'Novias', title: 'Tu esencia en un día inolvidable', accent: 'día inolvidable', body: 'Maquillaje y peinados que acompañan tu historia. Detalles cuidados para que te sientas tú misma y disfrutes de cada instante.', alt: 'Preparación de una novia para su boda', action: 'Consultar servicios para novias' },
     },
     casa: { eyebrow: 'La Romana · República Dominicana', title: 'Casa de Campo', accent: 'Campo', body: 'Un rincón extraordinario de La Romana que inspira momentos de belleza, calma y celebración.', note: 'Inspiración boho chic · sección en preparación', imageAlt: 'Terraza boho chic frente al mar con palmeras al atardecer' },
     about: { eyebrow: 'Sobre mí', title: 'Soy Jina Morales', titleAccent: 'Jina Morales', body: 'Detrás de ArteVital hay una visión de la belleza que combina arte, estética y atención personalizada.', storyToggle: 'Leer mi presentación', storyTitle: 'La belleza es mi inspiración', storyParagraphs: [
@@ -47,18 +48,19 @@ export const translations: Record<Language, Dictionary> = {
     footer: { tagline: 'Belleza, armonía y bienestar en La Romana.', explore: 'Explorar', follow: 'Síguenos', rights: 'Todos los derechos reservados.', provisional: 'Fotografías editoriales de servicios en revisión.' },
   },
   en: {
-    nav: { inicio: 'Home', peinados: 'Hairstyling', maquillaje: 'Makeup', faciales: 'Facials', 'casa-de-campo': 'Casa de Campo', nosotros: 'About me', opiniones: 'Reviews', contacto: 'Contact' },
+    nav: { inicio: 'Home', peinados: 'Hairstyling', maquillaje: 'Makeup', faciales: 'Facials', novias: 'Bridal', 'casa-de-campo': 'Casa de Campo', nosotros: 'About me', opiniones: 'Reviews', contacto: 'Contact' },
     menu: 'Open menu', closeMenu: 'Close menu', skip: 'Skip to content', booking: 'Book appointment', bookingMessage: 'Hello, I would like to book an appointment at ArteVital.',
     hero: {
       eyebrow: 'Beauty · Harmony · Wellness', first: 'Your beauty,', firstAccent: 'beauty', second: 'our inspiration', secondAccent: 'inspiration',
       body: 'Personalized beauty experiences to enhance your style and help you feel your best, every day.',
-      imageAlt: 'Editorial beauty portrait used as a temporary image',
+      imageAlt: 'Hairstyle with a tiara for a special occasion',
       imageNote: 'A space to make time for yourself',
     },
     services: {
-      peinados: { eyebrow: 'Hairstyling', title: 'Style that brings out your essence', accent: 'your essence', body: 'Hairstyles designed for every occasion, with thoughtful details and an elegant finish.', alt: 'Temporary editorial image of an updo hairstyle', action: 'Ask about hairstyling' },
-      maquillaje: { eyebrow: 'Makeup', title: 'Enhance your natural beauty', accent: 'natural beauty', body: 'Makeup designed to express your personality and complement your special moments.', alt: 'Temporary editorial image of makeup application', action: 'Ask about makeup' },
-      faciales: { eyebrow: 'Facials', title: 'Radiant skin, thoughtful care', accent: 'Radiant skin', body: 'Discover our facial care options and find the experience that suits you.', alt: 'Temporary editorial image of a facial experience', action: 'Ask about facials' },
+      peinados: { eyebrow: 'Hairstyling', title: 'Style that brings out your essence', accent: 'your essence', body: 'Hairstyles designed for every occasion, with thoughtful details and an elegant finish.', alt: 'Wavy hairstyle with braided detail', action: 'Ask about hairstyling' },
+      maquillaje: { eyebrow: 'Makeup', title: 'Enhance your natural beauty', accent: 'natural beauty', body: 'Makeup designed to express your personality and complement your special moments.', alt: 'Professional makeup preparation', action: 'Ask about makeup' },
+      faciales: { eyebrow: 'Facials', title: 'Radiant skin, thoughtful care', accent: 'Radiant skin', body: 'Discover our facial care options and find the experience that suits you.', alt: 'Facial care treatment', action: 'Ask about facials' },
+      novias: { eyebrow: 'Bridal', title: 'Your essence on an unforgettable day', accent: 'unforgettable day', body: 'Makeup and hairstyling to complement your story. Thoughtful details so you feel like yourself and enjoy every moment.', alt: 'A bride getting ready for her wedding', action: 'Ask about bridal services' },
     },
     casa: { eyebrow: 'La Romana · Dominican Republic', title: 'Casa de Campo', accent: 'Campo', body: 'An extraordinary corner of La Romana that inspires beauty, calm and celebration.', note: 'Boho chic inspiration · section in progress', imageAlt: 'Boho chic seaside terrace with palm trees at sunset' },
     about: { eyebrow: 'About me', title: "I'm Jina Morales", titleAccent: 'Jina Morales', body: 'Behind ArteVital is a vision of beauty that brings together artistry, aesthetics and personal attention.', storyToggle: 'Read my story', storyTitle: 'Beauty is my inspiration', storyParagraphs: [

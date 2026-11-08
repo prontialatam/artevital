@@ -21,7 +21,7 @@ document.addEventListener('keydown', (event) => {
     menuButton.focus();
   }
 });
-window.addEventListener('resize', () => { if (window.innerWidth > 1050) setMenu(false); });
+window.addEventListener('resize', () => { if (window.innerWidth > 1200) setMenu(false); });
 
 function updateHeader(): void { header?.classList.toggle('is-scrolled', window.scrollY > 24); }
 updateHeader();
