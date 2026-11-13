@@ -39,7 +39,6 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('main > section[id]').forEach((section) => observer.observe(section));
 
 document.querySelectorAll<HTMLAnchorElement>('[data-language]').forEach((link) => link.addEventListener('click', () => {
-  localStorage.setItem('artevital-language', link.dataset.language ?? 'es');
   link.href = `${link.getAttribute('href')}${window.location.hash}`;
 }));
 
@@ -65,24 +64,48 @@ notesDialog?.addEventListener('close', () => document.body.classList.remove('dia
 
 document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((carousel) => {
   const track = carousel.querySelector<HTMLElement>('.service-carousel__track');
-  const slides = carousel.querySelectorAll('.service-carousel__slide');
+  const slides = [...carousel.querySelectorAll<HTMLElement>('.service-carousel__slide')];
   const dots = carousel.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]');
   const count = carousel.querySelector<HTMLElement>('.carousel-count');
+  const toggle = carousel.querySelector<HTMLButtonElement>('[data-carousel-toggle]');
   if (!track || slides.length < 2) return;
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
   let touchStart = 0;
+  let inView = false;
+  let paused = motion.matches;
+  const hydrate = (index: number) => {
+    const image = slides[index % slides.length].querySelector<HTMLImageElement>('img[data-src]');
+    if (!image) return;
+    image.loading = 'eager';
+    if (image.dataset.srcset) image.srcset = image.dataset.srcset;
+    image.src = image.dataset.src ?? '';
+    delete image.dataset.src;
+    delete image.dataset.srcset;
+  };
+  const updateToggle = () => {
+    if (!toggle) return;
+    toggle.textContent = paused ? '▶' : 'Ⅱ';
+    toggle.setAttribute('aria-label', toggle.dataset[paused ? 'playLabel' : 'pauseLabel'] ?? 'Pause');
+    toggle.setAttribute('aria-pressed', String(paused));
+    count?.setAttribute('aria-live', paused ? 'polite' : 'off');
+  };
   const goTo = (index: number) => {
     active = (index + slides.length) % slides.length;
+    hydrate(active);
+    hydrate((active + 1) % slides.length);
     track.style.transform = `translateX(-${active * 100}%)`;
+    slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== active)));
     if (count) count.textContent = `${String(active + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-    dots.forEach((dot, dotIndex) => {
-      if (dotIndex === active) dot.setAttribute('aria-current', 'true');
+    dots.forEach((dot, i) => {
+      if (i === active) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
     });
   };
+  toggle?.addEventListener('click', () => { paused = !paused; updateToggle(); });
   carousel.querySelector('[data-carousel-prev]')?.addEventListener('click', () => goTo(active - 1));
   carousel.querySelector('[data-carousel-next]')?.addEventListener('click', () => goTo(active + 1));
-  dots.forEach((dot, index) => dot.addEventListener('click', () => goTo(index)));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
   carousel.addEventListener('pointerdown', (event) => { if (event.pointerType === 'touch') touchStart = event.clientX; });
   carousel.addEventListener('pointerup', (event) => {
     if (event.pointerType !== 'touch' || !touchStart) return;
@@ -90,14 +113,18 @@ document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((carousel) => 
     if (Math.abs(distance) > 40) goTo(active + (distance < 0 ? 1 : -1));
     touchStart = 0;
   });
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    window.setInterval(() => {
-      if (!document.hidden && !carousel.matches(':hover') && !carousel.matches(':focus-within')) goTo(active + 1);
-    }, 5200);
-  }
+  new IntersectionObserver((entries) => {
+    inView = entries[0].isIntersecting;
+    if (inView) { hydrate(active); hydrate((active + 1) % slides.length); }
+  }, { threshold: .1 }).observe(carousel);
+  motion.addEventListener('change', () => { paused = motion.matches; updateToggle(); });
+  updateToggle();
+  window.setInterval(() => {
+    if (inView && !paused && !document.hidden && !carousel.matches(':hover') && !carousel.matches(':focus-within')) goTo(active + 1);
+  }, 5200);
 });
 
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (!document.querySelector('.legal-page') && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const revealTargets = document.querySelectorAll<HTMLElement>('.service-copy, .service-visual, .casa-copy, .casa-intro, .casa-contact, .casa-plans, .casa-prices, .casa-notes-callout, .about-photo, .about-copy, .reviews > div, .contact > div, .footer-main > div, .footer-main > nav');
   const revealObserver = new IntersectionObserver((entries, currentObserver) => {
     entries.forEach((entry) => {

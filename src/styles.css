@@ -183,8 +183,9 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
 .casa-notes-dialog__close { position: sticky; top: 17px; float: right; z-index: 2; display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid var(--hairline); border-radius: 50%; background: #fff; cursor: pointer; font-size: 1.8rem; line-height: 1; }
 
 .about { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 54%); background: var(--warm-cream); }
-.about-photo { height: 640px; margin: 0; overflow: hidden; background: #33312f; }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 44%; }
+.about-photo { position: relative; height: 640px; margin: 0; overflow: hidden; background: #33312f; }
+.about-photo img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.about-photo .service-carousel__slide { background: #cfcbc6; }
 .about-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 640px; padding: 70px clamp(28px, 6.5vw, 110px); }
 .about-copy .eyebrow { margin-bottom: 14px; font-family: var(--script); font-size: 2.3rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
 .about-copy h2 { max-width: 550px; margin-bottom: 24px; }
@@ -384,3 +385,16 @@ h2 { font-size: clamp(4.5rem, 6.4vw, 7.4rem); line-height: .88; }
   .has-js .reveal { opacity: 1; filter: none; transform: none; }
   .has-js .writing-title { clip-path: none; }
 }
+
+.carousel-toggle { font-size: .85rem; }
+.footer-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; padding: 22px var(--page-gutter); border-top: 1px solid var(--hairline); font-size: .8rem; }
+.footer-legal a { text-decoration: underline; text-underline-offset: 4px; }
+.legal-page { max-width: 920px; margin: 0 auto; padding: 90px var(--page-gutter); }
+.legal-page h1 { margin-bottom: 28px; font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.15; }
+.legal-page h2 { margin: 40px 0 12px; font-family: var(--sans); font-size: 1.25rem; line-height: 1.4; }
+.legal-page p, .legal-page li { line-height: 1.8; }
+.legal-page a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.legal-page table { width: 100%; border-collapse: collapse; }
+.legal-page th, .legal-page td { padding: 12px; border-bottom: 1px solid var(--hairline); text-align: left; vertical-align: top; }
+.legal-page__date { color: var(--muted-text); font-size: .85rem; }
+@media (max-width: 760px) { .legal-page { padding-top: 48px; } .footer-legal { flex-direction: column; align-items: center; } }
