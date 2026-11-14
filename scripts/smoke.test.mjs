@@ -56,7 +56,7 @@ test('official domain, legal pages and deferred photo galleries are consistent',
     for (const route of ['aviso-legal', 'privacidad', 'cookies', 'reservas']) {
       const html = readFileSync(resolve(dist, lang, route, 'index.html'), 'utf8');
       assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
-      assert.ok(html.includes(`rel="canonical" href="https://www.artevitalrd.com/${lang}/${route}/"`));
+      assert.ok(html.includes(`rel="canonical" href="https://artevitalrd.com/${lang}/${route}/"`));
       assert.ok(home.includes(`href="/${lang}/${route}/"`));
       assert.ok(html.includes('Arte Vital by Jina Morales EIRL'));
       assert.ok(!html.includes('artevital.prontialatam.com'));

@@ -1,6 +1,6 @@
 # ArteVital web
 
-Sitio estático bilingüe (ES/EN), publicado en https://www.artevitalrd.com/.
+Sitio estático bilingüe (ES/EN), publicado en https://artevitalrd.com/.
 
 ## Ejecutar
 
@@ -20,7 +20,7 @@ pnpm build
 pnpm test
 ```
 
-`dist/` es la salida local del build. `docs/` contiene la versión publicada por GitHub Pages desde la rama `main`; incluye el dominio personalizado en `docs/CNAME`. Para actualizar la web, ejecutar `SITE_URL=https://www.artevitalrd.com pnpm build`, copiar el contenido de `dist/` a `docs/` y conservar `docs/CNAME` y `docs/.nojekyll` antes de subir los cambios a GitHub.
+`dist/` es la salida local del build. `docs/` contiene la versión publicada por GitHub Pages desde la rama `main`; incluye el dominio personalizado en `docs/CNAME`. Para actualizar la web, ejecutar `SITE_URL=https://artevitalrd.com pnpm build`, copiar el contenido de `dist/` a `docs/` y conservar `docs/CNAME` y `docs/.nojekyll` antes de subir los cambios a GitHub.
 
 ## Editar contenido
 
@@ -42,4 +42,4 @@ El logo transparente procede del archivo oficial aportado. La foto de Jina conse
 
 «Reservar cita» abre WhatsApp con el número facilitado y un mensaje prellenado según el idioma. No hay agenda ni formulario. No se cargan cookies de analítica.
 
-La publicación oficial usa `SITE_URL=https://www.artevitalrd.com` y GitHub Pages desde `main:/docs`. Las páginas legales están disponibles en ambos idiomas. El RNC está publicado como dato provisional por indicación del titular; los precios en US$ y las condiciones de Casa de Campo se mantienen sin cambios. El chatbot está retirado de esta versión.
+La publicación oficial usa `SITE_URL=https://artevitalrd.com` y GitHub Pages desde `main:/docs`. Las páginas legales están disponibles en ambos idiomas. El RNC está publicado como dato provisional por indicación del titular; los precios en US$ y las condiciones de Casa de Campo se mantienen sin cambios. El chatbot está retirado de esta versión.
